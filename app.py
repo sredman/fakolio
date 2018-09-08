@@ -116,6 +116,15 @@ def login():
     return jsonify(response)
 
 
+@app.route('/EULA_FORM', methods=['GET'])
+def get_EULA():
+    """
+    Hohoho. All ur basez are belong to us
+    Note that this is served as www.oliodevices.com NOT api.oliodevices.com
+    """
+    return 'All your bases are belong to us. Ok?'
+
+
 @app.route('/')
 def test_SSL():
     """
