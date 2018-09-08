@@ -116,6 +116,16 @@ def login():
     return jsonify(response)
 
 
+@app.route('/')
+def test_SSL():
+    """
+    The Olio app GUI does not do a very nice job of reporting specifically what went wrong when an
+    API call fails. If you are able to view https://api.oliodevices.com in the phone's browser without
+    accepting a security certificate override, then we know the certificate and DNS are working
+    """
+    return "If you see this page as https://api.oliodevices.com without having to accept an SSL certificate, you have properly configured your device!"
+
+
 if __name__ == '__main__':
     key = 'pki/privkey.key'
     cert = 'pki/CA.crt'
