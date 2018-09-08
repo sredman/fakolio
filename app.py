@@ -30,7 +30,8 @@ def put_device_profile():
 
     For real, don't ask me what this is supposed to do, though
     """
-    return
+    response = {}
+    return jsonify(response)
 
 
 @app.route('/api/v1/units/<string:watch_MAC>', methods=['PUT'])
@@ -88,6 +89,9 @@ def put_watch_MAC(watch_MAC: str):
 def get_settings(user_id: int):
     """
     Handle a settings request
+
+    TODO: Make this reply in the proper structure (SettingsEnvelope)
+
     :param user_id: Whatever we sent the device as the reply to its get_me request
     """
     response = {}
