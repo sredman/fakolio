@@ -49,7 +49,7 @@ def put_device_profile(setting_name: str):
     return jsonify(response)
 
 
-@app.route('/api/v1/units/<string:watch_MAC>', methods=['PUT'])
+@app.route('/api/v1/units/<string:watch_MAC>', methods=['PUT', 'GET'])
 def put_watch_MAC(watch_MAC: str):
     """
     This is called immediately after clicking the watch in the "Connect by selecting your watch below" dialogue
@@ -60,19 +60,23 @@ def put_watch_MAC(watch_MAC: str):
 
     This returns a "com.olio.state.Unit" object. Goodness knows what those fields are supposed to contain...
     """
-    user_id = request.json["user_id"]
-    firmware = {"bluetoothApkHash": None
+    if len(request.data) > 0:
+        user_id = request.json["user_id"]
+    else:
+        user_id = None
+
+    firmware = {"bluetoothApkHash": "c949a72209ff2f6c10fd2b687615eacb"
                 , "bluetoothApkUrl": None
-                , "bluetoothApkVersion": "bt_apk_version"
+                , "bluetoothApkVersion": "4.4.4"
                 , "defaultSettingsCollectionId": 4321
-                , "firmwareHash": None
+                , "firmwareHash": "15b84af9c937e01cc04b926c763b6e15"  # This corresponds to the last officially-available firmware.zip
                 , "firmwareUrl": None
                 , "id": user_id
                 , "name": "firmware_name"
-                , "uiApkHash": None
+                , "uiApkHash": "2343b4ed0c0c57b3eac8d97ce9a317a3"
                 , "uiApkUrl": None
                 , "uiApkVersion": "ui_apk_version"
-                , "version": "firmware_version"}
+                , "version": "1.10.221"}
 
     product = {"band_style": "Steel"
                , "body_style": "Steel"
@@ -81,10 +85,10 @@ def put_watch_MAC(watch_MAC: str):
                , "id": user_id
                , "name": "product_name"
                , "sku": "product_sku"}
-    current_look = {"asset_bundle_url": None
+    current_look = {"asset_bundle_url": "looks/Model1_Gold"
                     , "current": True
                     , "id": user_id
-                    , "name": "Look_name"
+                    , "name": "Model1_Gold"
                     , "product": product
                     , "sample_watch_face": None}
     user = {"email": "email@example.com"
@@ -120,7 +124,7 @@ def get_me():
 
     I literally have no idea what this does except we get the ID back later
     """
-    response = {"email": "haha@example.com"
+    response = {"email": "haha@example.com"  # This ends up in the app's "Account Info" screen
                 , "id" : "1234"}
     return jsonify(response)
 
