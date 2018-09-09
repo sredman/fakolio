@@ -52,6 +52,11 @@ def put_device_profile(setting_name: str):
 
     Unfortunately, the return shape is pretty free-form and not easy to deduce
     """
+    try:
+        settings[setting_name] = request.json
+    except:
+        # Just try to save whatever we got but don't blow up if something goes wrong
+        pass
 
     # Basic return type is a "SettingsEnvelope"
     response = {"id": 4567
