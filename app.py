@@ -18,9 +18,22 @@
 # You should have received a copy of the GNU General Public License
 # along with Foobar. If not, see <http://www.gnu.org/licenses/>.
 
+import flask
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
+
+MY_URL = 'https://api.oliodevices.com'
+FIRMWARE_ENDPOINT = '/firmwareUpdate'  # We can tell the app an arbritrary place to download firmware
+
+settings = {}  # Useful for debugging, the /api/v1/settings will save things here for later inspection
+
+@app.route('/firmwareUpdate', methods=['GET'])
+def get_firmware():
+    """
+    Firmware update? Oh boy!
+    """
+    return flask.send_file('olio-firmware.zip')
 
 @app.route('/api/v1/brands/<int:brand_id>/app_requirements', methods=['GET'])
 def get_app_requirements(brand_id: int):
@@ -70,13 +83,13 @@ def put_watch_MAC(watch_MAC: str):
                 , "bluetoothApkVersion": "4.4.4"
                 , "defaultSettingsCollectionId": 4321
                 , "firmwareHash": "15b84af9c937e01cc04b926c763b6e15"  # This corresponds to the last officially-available firmware.zip
-                , "firmwareUrl": None
+                , "firmwareUrl": MY_URL + FIRMWARE_ENDPOINT
                 , "id": user_id
                 , "name": "firmware_name"
                 , "uiApkHash": "2343b4ed0c0c57b3eac8d97ce9a317a3"
                 , "uiApkUrl": None
                 , "uiApkVersion": "ui_apk_version"
-                , "version": "1.10.221"}
+                , "version": "1.10.220"}
 
     product = {"band_style": "Steel"
                , "body_style": "Steel"
@@ -113,7 +126,11 @@ def get_settings(user_id: int):
 
     :param user_id: Whatever we sent the device as the reply to its get_me request
     """
-    response = {}
+    response = {"id": user_id
+                , "name": "user_settings_request_reply"
+                , "value": None  # Should be a MessagePayload
+                , "version": "1.10.10"  # java.lang.Object
+                }
     return jsonify(response)
 
 
