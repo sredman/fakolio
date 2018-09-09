@@ -32,14 +32,20 @@ def get_app_requirements(brand_id: int):
     return jsonify(response)
 
 
-@app.route('/api/v1/settings/PairedDeviceProfile', methods=['PUT'])
-def put_device_profile():
+@app.route('/api/v1/settings/<string:setting_name>', methods=['PUT'])
+def put_device_profile(setting_name: str):
     """
-    Called immediately after put_watch_MAC
+    Called to get various settings
 
-    For real, don't ask me what this is supposed to do, though
+    Unfortunately, the return shape is pretty free-form and not easy to deduce
     """
-    response = {}
+
+    # Basic return type is a "SettingsEnvelope"
+    response = {"id": 4567
+                , "name": setting_name
+                , "value": None  # Should be a MessagePayload
+                , "version": "1.10.10"  # java.lang.Object
+                }
     return jsonify(response)
 
 
