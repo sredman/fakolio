@@ -16,4 +16,16 @@
 
 - Accept the "EULA"
 
-- Can see the watch in the list of devices and attempt to pair, but the app crashes, presumably due to a malformed response from put_watch_MAC (/api/v1/units/<string>)
+- At this point, can actually pair and get into the app by:
+    - Select the watch to pair
+      - If you have already paired via Bluetooth, can probably skip this step
+      - App crashes
+    - Clear Olio Assist app data (from Android settings)
+      - Probably sane to force kill it as well
+    - Go back to step 1 and re login, etc.
+    - When you get to the list of devices DO NOT pick one. Instead, push "Skip" in the top right and set up the assistant
+    - Set up Olio Assistant
+    - When finished, you will be back to the watch selection screen without a skip button. Pick your watch.
+    - App is non-functional, and watch still hasn't detected the pairing, but it's one step closer...
+
+- After pairing the watch and seeing non-functional app, if you restore the app's data partition (via Titanium Backup, etc.), the watch works again!
