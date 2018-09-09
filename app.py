@@ -22,6 +22,15 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
+@app.route('/api/v1/brands/<int:brand_id>/app_requirements', methods=['GET'])
+def get_app_requirements(brand_id: int):
+    """
+    Tell the app what minimum version it must be in order to run
+    """
+    response = {"apkMinVersion": "1.0.0"
+                , "message": "Your app version did not pass the minimum version check. Please report this."}
+    return jsonify(response)
+
 
 @app.route('/api/v1/settings/PairedDeviceProfile', methods=['PUT'])
 def put_device_profile():
