@@ -28,4 +28,4 @@
     - When finished, you will be back to the watch selection screen without a skip button. Pick your watch.
     - App is non-functional, and watch still hasn't detected the pairing, but it's one step closer...
 
-- After pairing the watch and seeing non-functional app, if you restore the app's data partition (via Titanium Backup, etc.), the watch works again!
+- After pairing the watch and seeing non-functional app, if you restore the app's data partition (via Titanium Backup, etc.) from a backup where the watch was previously working, the watch works again!
