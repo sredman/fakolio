@@ -28,7 +28,15 @@ FIRMWARE_ENDPOINT = '/firmwareUpdate'  # We can tell the app an arbritrary place
 
 settings = {}  # Useful for debugging, the /api/v1/settings will save things here for later inspection
 
-@app.route('/firmwareUpdate', methods=['GET'])
+@app.route('/api/v1/logs', methods=['POST'])
+def post_logs():
+    """
+    We get logs sometimes. I wonder what's in here?
+    """
+    print(request.json)
+    return ""
+
+@app.route(FIRMWARE_ENDPOINT, methods=['GET'])
 def get_firmware():
     """
     Firmware update? Oh boy!
@@ -46,7 +54,7 @@ def get_app_requirements(brand_id: int):
 
 
 @app.route('/api/v1/settings/<string:setting_name>', methods=['PUT'])
-def put_device_profile(setting_name: str):
+def put_settings(setting_name: str):
     """
     Called to get various settings
 
