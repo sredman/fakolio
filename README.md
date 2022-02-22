@@ -1,3 +1,5 @@
+# Note: Development is discontinued because I bricked my watch. Word to the wise, don't set up a post-boot script which reboots the watch 10 seconds after booting!
+
 - Need to configure a local DNS server which reports that "api.oliodevices.com" and "www.oliodevices.com" is the address on which this server is running
 
 - Need to add self-signed security certificate to Android: https://aboutssl.org/how-to-create-and-import-self-signed-certificate-to-android-device/
